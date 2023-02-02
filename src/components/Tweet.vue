@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import TweetPostForm from './TweetPostForm.vue'
+import TweetPostList from './TweetPostList.vue'
+import { ref, reactive, defineProps } from 'vue'
+
 const tweets = ref(
   [
     { id: 0, description: 'Hello' },
@@ -7,11 +10,8 @@ const tweets = ref(
     { id: 2, description: 'three' },
   ]
 )
-const inputtingDescription = ref<string>('')
-
-const postTweet = () => {
-  const tweet = { id: Math.random(), description: inputtingDescription.value }
-  inputtingDescription.value = ''
+const postTweet = (description: string) => {
+  const tweet = { id: Math.random(), description }
   tweets.value.push(tweet)
 }
 const deleteTweet = (id: number) => {
@@ -22,20 +22,8 @@ const deleteTweet = (id: number) => {
 <template>
   <div class="container">
     <h1>Tweeter</h1>
-    <div class="form-container">
-      <input v-model="inputtingDescription" />
-      <button @click="postTweet">post</button>
-    </div>
-    <div class="tweet-container">
-      <ul>
-        <li v-for="tweet in tweets" :key="tweet.id" class="tweet-list">
-          <span>
-            {{ tweet.description }}
-          </span>
-          <button @click="deleteTweet(tweet.id)">delete</button>
-        </li>
-      </ul>
-    </div>
+    <TweetPostForm @post-tweet="postTweet" />
+    <TweetPostList :tweets="tweets" @delete-tweet="deleteTweet" />
   </div>
 </template>
 
