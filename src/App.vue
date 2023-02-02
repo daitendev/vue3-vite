@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Payment from './components/Payment.vue'
+import Tweet from './components/Tweet.vue'
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import Payment from './components/Payment.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <Payment />
+  <Tweet />
 </template>
 
 <style scoped>
